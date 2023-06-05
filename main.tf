@@ -1,5 +1,5 @@
 resource "aws_rds_cluster" "default" {
-  depends_on                      =  [aws_rds_cluster_parameter_group.default, aws_db_subnet_group.default]
+  depends_on                      = [aws_rds_cluster_parameter_group.default, aws_db_subnet_group.default]
   for_each                        = var.rds
   cluster_identifier              = "${var.env}-${each.key}-roboshop-rds"
   engine                          = each.value.engine
@@ -9,6 +9,7 @@ resource "aws_rds_cluster" "default" {
   master_password                 = "bar"
   skip_final_snapshot             = true
   db_cluster_parameter_group_name = "${var.env}-${each.key}-roboshop-rds"
+  db_subnet_group_name            = "${var.env}-${each.key}-roboshop-rds"
 }
 
 resource "aws_rds_cluster_parameter_group" "default" {
