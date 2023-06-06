@@ -12,7 +12,6 @@ resource "aws_rds_cluster" "default" {
 }
 
 resource "aws_rds_cluster_parameter_group" "default" {
-
   name        = "${var.env}-${var.name}-roboshop-rds"
   family      = "aurora5.6"
   description = "RDS default cluster parameter group"
