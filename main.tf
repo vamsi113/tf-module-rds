@@ -1,6 +1,5 @@
 resource "aws_rds_cluster" "default" {
   depends_on                      = [aws_rds_cluster_parameter_group.default, aws_db_subnet_group.default]
-
   cluster_identifier              = "${var.env}-${var.name}-roboshop-rds"
   engine                          = var.engine
   engine_version                  = var.engine_version
