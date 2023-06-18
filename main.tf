@@ -26,3 +26,12 @@ resource "aws_db_subnet_group" "default" {
     Name = "${var.env}-${var.name}-roboshop-rds"
   }
 }
+
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  for_each = var.nodes
+  identifier         = "${var.env}-${var.name}-rds-${each.key}"
+  cluster_identifier = aws_rds_cluster.default.id
+  instance_class     = each.value.instance_class
+  engine             = aws_rds_cluster.default.engine
+  engine_version     = aws_rds_cluster.default.engine_version
+}
